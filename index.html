@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Urna Eletrônica</title>
+</head>
+<body>
+    <section class="sessao-urna">
+        <div id="urna">
+           <div class="visor" id="tela">
+                <div class="left-right">
+                    <div class="visor-left">
+                        <div class="d1">
+                            <div class="d1-1">
+                                Seu Voto Para
+                            </div>
+                            <div class="d1-2">
+                                Vereador
+                            </div>
+                            <div class="d1-3">
+                                <div class="inp">
+                                    <div class="vote-num1"></div>
+                                </div>
+                                <div class="inp">
+                                    <div class="vote-num2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d1-4">
+                                <div class="nome">
+                                    Nome: QUALQUER PESSOA
+                                </div>
+                                <div class="partido">
+                                    Partido: QUALQUER
+                                </div>
+                                <div class="vp">
+                                    Vice-Prefeito: QUALQUER
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="visor-right">
+        
+                    </div>
+                </div>
+                <div class="d2">
+                    Aperte a tecla:<br/>
+                    CONFIRMA para CONFIRMAR este voto<br/>
+                    CORRIGE para REINICIAR esse voto
+                </div>
+           </div>
+           <div class="area-teclado">
+            <div class="logo">
+                <img src="assets/imgs/logo.png" alt="logo">
+                <div class="t-logo">
+                    <h1 class="t-logo-1">Justiça</h1>
+                    <h1 class="t-logo-2">Eleitoral</h1>
+                </div>
+            </div>
+            <div class="teclado">
+                <div class="l">
+                    <div onclick="clicaNum('1')" class="botaoNum">
+                        <label>1</label>
+                    </div>
+                    <div onclick="clicaNum(2)" class="botaoNum" value="2">
+                        <label>2</label>
+                    </div>
+                    <div  onclick="clicaNum(3)" class="botaoNum" value="2">
+                        <label>3</label>
+                    </div>
+                </div>
+                <div class="l">
+                    <div onclick="clicaNum(4)" class="botaoNum" value="4">
+                        <label>4</label>
+                    </div>
+                    <div onclick="clicaNum(5)" class="botaoNum" value="5">
+                        <label>5</label>
+                    </div>
+                    <div  onclick="clicaNum(6)" class="botaoNum" value="6">
+                        <label>6</label>
+                    </div>
+                </div>
+                <div class="l">
+                    <div onclick="clicaNum(7)" class="botaoNum" value="7">
+                        <label>7</label>
+                    </div>
+                    <div onclick="clicaNum(8)" class="botaoNum" value="8">
+                        <label>8</label>
+                    </div>
+                    <div  onclick="clicaNum(9)" class="botaoNum" value="9">
+                        <label>9</label>
+                    </div>
+                </div>
+                <div class="l">
+                    <div onclick="clicaNum(0)" class="botaoNum" value="0">
+                        <label>0</label>
+                    </div>
+                </div>
+                <div class="l">
+                    <div onclick="clicaBranco()" class="botaoBranco">
+                        <label>Branco</label>
+                    </div>
+                    <div onclick="clicaCorrige()" class="botaoCorrige">
+                        <label>Corrige</label>
+                    </div>
+                    <div  onclick="clicaConfirma()" class="botaoConfirma">
+                        <label>Confirma</label>
+                    </div>
+                </div>
+            </div>
+           </div>
+        </div>
+        <div>
+            <button class="on"onclick="ligaUrna()">ON</button>
+            <button class="off" onclick="desligaUrna()">OFF</button>
+        </div>
+        <div class="showCadastro">
+            <div class="table-1">
+                <div class="header">
+                    <span>Cadastro Eleitores</span>
+                    <button onclick="openModal1()" id="new">Incluir</i></button>
+                  </div>
+                  <div class="divTable">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Nome</th>
+                          <th>Título</th>
+                          <th class="acao">Excluir</th>
+                        </tr>
+                      </thead>
+                      <tbody class="mostra-eleitores">
+                        <tr>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+            </div>
+            <div class="table-2">
+                <div class="header">
+                    <span>Cadastro Vereadores</span>
+                    <button onclick="openModal2()" id="new">Incluir</i></button>
+                  </div>
+                  <div class="divTable">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Nome</th>
+                          <th>Número</th>
+                          <th>Partido</th>
+                          <th class="acao">Excluir</th>
+                        </tr>
+                      </thead>
+                      <tbody class="mostra-vereadores">
+                        <tr>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+            </div>
+            <div class="table-3">
+                <div class="header">
+                    <span>Cadastro Prefeitos</span>
+                    <button onclick="openModal3()" id="new">Incluir</i></button>
+                  </div>
+                  <div class="divTable">
+                    <table>
+                      <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Nome Vice</th>
+                            <th>Número</th>
+                            <th>Partido</th>
+                            <th class="acao">Excluir</th>
+                        </tr>
+                      </thead>
+                      <tbody class="mostra-prefeitos">
+                        <tr>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+            </div>
+        </div>
+            <div class="cadastro">
+                <div class="modal-container1">
+                    <div class="modal1">   
+                        <label for="">Nome Eleitor:</label>
+                        <input type="text"  id="nomeEleitor" class="inputString1" pattern="([aA-zZ]+)">
+                        <label for="">Número Título:</label>
+                        <input type="text" id="tituloEleitor" class="inputNumber1" maxlength="3">
+                        <button onclick="criaEleitor()">Cadastrar</button>
+                    </div>
+                </div>   
+          
+            <div class="cadastro">
+                <div class="modal-container2">
+                    <div class="modal2">   
+                        <label for="">Nome Vereador:</label>
+                        <input type="text" id="nome-vereador" class="inputString2">
+                        <label for="">Número:</label>
+                        <input type="text" id="numero-vereador" class="inputNumber2" maxlength="5">
+                        <label for="">Partido:</label>
+                        <input type="text" id="partido-vereador" class="inputString3">               <button onclick="criaVereador()">Cadastrar</button>
+                    </div>
+                </div>          
+            </div>
+            <div class="cadastro">
+                <div class="modal-container3">
+                    <div class="modal3">   
+                        <label for="">Nome Prefeito:</label>
+                        <input type="text" id="nome-prefeito" class="inputString4">
+                        <label for="">Nome Vice:</label>
+                        <input type="text" id="vice-prefeito" class="inputString5">
+                        <label for="">Número:</label>
+                        <input type="text" id="numero-prefeito" class="inputNumber3" maxlength="2">
+                        <label for="">Partido:</label>
+                        <input type="text" id="partido-prefeito" class="inputString6">               <button onclick="criaPrefeito()">Cadastrar</button>
+                    </div>
+                </div>          
+            </div>
+        </div>
+    </section>
+    <script src="https://kit.fontawesome.com/ed140f0d76.js" crossorigin="anonymous"></script> 
+    <script src="assets/script/etapas.js"></script>
+    <script src="assets/script/script.js"></script>
+</body>
+</html>
