@@ -8,51 +8,35 @@
     <title>Urna Eletrônica</title>
 </head>
 <body>
-    <section class="sessao-urna">
-        <div id="urna">
-           <div class="visor" id="tela">
+    <section class="section-urn">
+        <div id="urn">
+           <div class="screen">
                 <div class="left-right">
-                    <div class="visor-left">
+                    <div class="screen-left">
                         <div class="d1">
                             <div class="d1-1">
-                                Seu Voto Para
                             </div>
                             <div class="d1-2">
-                                Vereador
                             </div>
                             <div class="d1-3">
-                                <div class="inp">
-                                    <div class="vote-num1"></div>
-                                </div>
-                                <div class="inp">
-                                    <div class="vote-num2">
-                                    </div>
-                                </div>
                             </div>
                             <div class="d1-4">
                                 <div class="nome">
-                                    Nome: QUALQUER PESSOA
                                 </div>
                                 <div class="partido">
-                                    Partido: QUALQUER
                                 </div>
                                 <div class="vp">
-                                    Vice-Prefeito: QUALQUER
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="visor-right">
-        
+                    <div class="screen-right">
                     </div>
                 </div>
                 <div class="d2">
-                    Aperte a tecla:<br/>
-                    CONFIRMA para CONFIRMAR este voto<br/>
-                    CORRIGE para REINICIAR esse voto
                 </div>
            </div>
-           <div class="area-teclado">
+           <div class="keyboard-area">
             <div class="logo">
                 <img src="assets/imgs/logo.png" alt="logo">
                 <div class="t-logo">
@@ -60,53 +44,53 @@
                     <h1 class="t-logo-2">Eleitoral</h1>
                 </div>
             </div>
-            <div class="teclado">
-                <div class="l">
-                    <div onclick="clicaNum('1')" class="botaoNum">
+            <div class="keyboard">
+                <div class="align-btn">
+                    <div onclick="clicaNum('1')" class="btnNum">
                         <label>1</label>
                     </div>
-                    <div onclick="clicaNum(2)" class="botaoNum" value="2">
+                    <div onclick="clicaNum(2)" class="btnNum" value="2">
                         <label>2</label>
                     </div>
-                    <div  onclick="clicaNum(3)" class="botaoNum" value="2">
+                    <div  onclick="clicaNum(3)" class="btnNum" value="2">
                         <label>3</label>
                     </div>
                 </div>
-                <div class="l">
-                    <div onclick="clicaNum(4)" class="botaoNum" value="4">
+                <div class="align-btn">
+                    <div onclick="clicaNum(4)" class="btnNum" value="4">
                         <label>4</label>
                     </div>
-                    <div onclick="clicaNum(5)" class="botaoNum" value="5">
+                    <div onclick="clicaNum(5)" class="btnNum" value="5">
                         <label>5</label>
                     </div>
-                    <div  onclick="clicaNum(6)" class="botaoNum" value="6">
+                    <div  onclick="clicaNum(6)" class="btnNum" value="6">
                         <label>6</label>
                     </div>
                 </div>
-                <div class="l">
-                    <div onclick="clicaNum(7)" class="botaoNum" value="7">
+                <div class="align-btn">
+                    <div onclick="clicaNum(7)" class="btnNum" value="7">
                         <label>7</label>
                     </div>
-                    <div onclick="clicaNum(8)" class="botaoNum" value="8">
+                    <div onclick="clicaNum(8)" class="btnNum" value="8">
                         <label>8</label>
                     </div>
-                    <div  onclick="clicaNum(9)" class="botaoNum" value="9">
+                    <div  onclick="clicaNum(9)" class="btnNum" value="9">
                         <label>9</label>
                     </div>
                 </div>
-                <div class="l">
-                    <div onclick="clicaNum(0)" class="botaoNum" value="0">
+                <div class="align-btn">
+                    <div onclick="clicaNum(0)" class="btnNum" value="0">
                         <label>0</label>
                     </div>
                 </div>
-                <div class="l">
-                    <div onclick="clicaBranco()" class="botaoBranco">
+                <div class="align-btn">
+                    <div onclick="clicaBranco()" class="btnWhite">
                         <label>Branco</label>
                     </div>
-                    <div onclick="clicaCorrige()" class="botaoCorrige">
+                    <div onclick="clicaCorrige()" class="btnDel">
                         <label>Corrige</label>
                     </div>
-                    <div  onclick="clicaConfirma()" class="botaoConfirma">
+                    <div  onclick="clicaConfirma()" class="btnConfirm">
                         <label>Confirma</label>
                     </div>
                 </div>
@@ -117,9 +101,9 @@
             <button class="on"onclick="ligaUrna()">ON</button>
             <button class="off" onclick="desligaUrna()">OFF</button>
         </div>
-        <div class="showCadastro">
+        <div class="show-register">
             <div class="table-1">
-                <div class="header">
+                <div class="header-register">
                     <span>Cadastro Eleitores</span>
                     <button onclick="openModal1()" id="new">Incluir</i></button>
                   </div>
@@ -140,7 +124,7 @@
                   </div>
             </div>
             <div class="table-2">
-                <div class="header">
+                <div class="header-register">
                     <span>Cadastro Vereadores</span>
                     <button onclick="openModal2()" id="new">Incluir</i></button>
                   </div>
@@ -162,7 +146,7 @@
                   </div>
             </div>
             <div class="table-3">
-                <div class="header">
+                <div class="header-register">
                     <span>Cadastro Prefeitos</span>
                     <button onclick="openModal3()" id="new">Incluir</i></button>
                   </div>
@@ -185,7 +169,7 @@
                   </div>
             </div>
         </div>
-            <div class="cadastro">
+            <div class="register">
                 <div class="modal-container1">
                     <div class="modal1">   
                         <label for="">Nome Eleitor:</label>
@@ -196,7 +180,7 @@
                     </div>
                 </div>   
           
-            <div class="cadastro">
+            <div class="register">
                 <div class="modal-container2">
                     <div class="modal2">   
                         <label for="">Nome Vereador:</label>
@@ -208,7 +192,7 @@
                     </div>
                 </div>          
             </div>
-            <div class="cadastro">
+            <div class="register">
                 <div class="modal-container3">
                     <div class="modal3">   
                         <label for="">Nome Prefeito:</label>

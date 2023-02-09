@@ -1,30 +1,29 @@
-var tela;
-var selecionado;
-var indexEleitor;
-var indexVereador;
-var indexPrefeito;
-var numVote = "";
-var etapa = 0;
-const modal1 = document.querySelector('.modal-container1');
-const modal2 = document.querySelector('.modal-container2');
-const modal3 = document.querySelector('.modal-container3');
+var screen
+var selecionado
+var indexEleitor
+var indexVereador
+var indexPrefeito
+var numVote = ""
+var etapa = 0
+const modal1 = document.querySelector('.modal-container1')
+const modal2 = document.querySelector('.modal-container2')
+const modal3 = document.querySelector('.modal-container3')
 
 //LIGA URNA E INICIA PRIMEIRA ETAPA
 function ligaUrna () {
-    tela = document.getElementById("tela")
-    tela.style.background = "linear-gradient(to right, #e8e8e8, #c1c1c1)";
-    tela.innerHTML = `
+    screen = document.querySelector('.screen')
+    screen.style.background = "linear-gradient(to right, #e8e8e8, #c1c1c1)"
+    screen.innerHTML = `
         <div class="logo-entrada">
             <img class="blinkFadeIn" id="logo-entrada" src="assets/imgs/logo.png" alt="">
         </div>`
     setTimeout(fadeOut,1500)
     function fadeOut (){
-        tela.innerHTML = `
+        screen.innerHTML = `
         <div class="logo-entrada">
             <img class="blinkFadeOut" id="logo-entrada" src="assets/imgs/logo.png" alt="">
         </div>`
-        setTimeout(primeiraEtapa,900)
-    
+        setTimeout(primeiraEtapa,900) 
     }
 }
 
@@ -185,8 +184,8 @@ function clicaConfirma (){
     }else if (etapa==3){
         etapas[2].cPrefeitos[indexPrefeito].votos += 1;
         etapas[0].eleitores[indexEleitor].votoPrefeito = numVote;
-        tela.classList.add('fim')
-        tela.innerHTML = `<div class="resultado">FIM</div>`
+        screen.classList.add('fim')
+        screen.innerHTML = `<div class="resultado">FIM</div>`
         let faltaVotar = etapas[0].eleitores.filter(eleitor => eleitor.votou == "Não")
         console.log(faltaVotar)
         if (faltaVotar.length>0){
@@ -198,8 +197,8 @@ function clicaConfirma (){
     
 }
 /*function resultado (){
-    tela.classList.remove('fim')
-    tela.classList.add('resultado')
+    screen.classList.remove('fim')
+    screen.classList.add('resultado')
     let resultado = document.querySelector('.resultado')
     etapas[1].cVereadores.forEach(element => {
         resultado.innerHTML += `Nome: ${element.nomeVereador} - Votos: ${element.votos}`
@@ -212,8 +211,8 @@ function primeiraEtapa (){
     numVote=""
     /*let logoEntrada = document.getElementById("logo-entrada")
     logoEntrada.style.display = "none";*/
-    tela.classList.remove('fim')
-    tela.innerHTML = `
+    screen.classList.remove('fim')
+    screen.innerHTML = `
     <div class="left-right">
         <div class="visor-left">
             <div class="d1">
@@ -250,7 +249,7 @@ function primeiraEtapa (){
 
    for (var i = 0;i<etapas[0].qtdeNum;i++){
     d1_3.innerHTML += `
-        <div class="inp" id="numero">
+        <div class="container-vote" id="numero">
         </div>
         `;
     }
@@ -275,7 +274,7 @@ function etapa2(){
     for (var i = 0;i<etapas[1].qtdeNum;i++){
         
         d13.innerHTML += `
-            <div class="inp" id="numero">
+            <div class="container-vote" id="numero">
             </div>
             `;
         }
@@ -301,7 +300,7 @@ function etapa3(){
     for (var i = 0;i<etapas[2].qtdeNum;i++){
         
         d13.innerHTML += `
-            <div class="inp" id="numero">
+            <div class="container-vote" id="numero">
             </div>
             `;
         }
