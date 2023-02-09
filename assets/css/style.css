@@ -14,7 +14,7 @@ body {
     background: linear-gradient(90deg, rgba(154,154,154,1) 21%, rgba(154,153,153,1) 77%);
 }
 /*SESSÃO DA URNA*/
-.section-urn {
+section {
     height: 100vh;
     display: flex;
     flex-direction: column;

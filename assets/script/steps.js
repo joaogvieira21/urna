@@ -1,4 +1,4 @@
-let etapas = [
+let steps = [
     {
         titulo:'número do seu titúlo:',
         qtdeNum: 3,

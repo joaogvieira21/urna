@@ -1,5 +1,4 @@
 var screen
-var selecionado
 var indexEleitor
 var indexVereador
 var indexPrefeito
@@ -10,7 +9,7 @@ const modal2 = document.querySelector('.modal-container2')
 const modal3 = document.querySelector('.modal-container3')
 
 //LIGA URNA E INICIA PRIMEIRA ETAPA
-function ligaUrna () {
+function urnOn () {
     screen = document.querySelector('.screen')
     screen.style.background = "linear-gradient(to right, #e8e8e8, #c1c1c1)"
     screen.innerHTML = `
@@ -27,8 +26,8 @@ function ligaUrna () {
     }
 }
 
-//BOTAO NUMERAIS
-function clicaNum (n){
+//BOTAO NUMERAL - VERIFICA EM QUAL ESTAPA ESTÁ, OU ADICIONAR NÚMEROS
+function clickNum (n){
     if (etapa==1) {
         if (numVote.length==0){
             numero[0].innerHTML = n;             
@@ -96,12 +95,12 @@ function clicaNum (n){
 } 
 
 //BOTAO EM BRANCO
-function clicaBranco (){
+function clickWhite (){
     
 
 }
-//BOTAO CORRIGE
-function clicaCorrige (){ 
+//BOTAO CORRIGE, VERIFICA EM QUAL ETAPA ESTÁ REMOVE O ULTIMO NÚMERO DIGITADO
+function clickDel (){ 
     if (etapa==1){
         if (numVote.length==3){
             numero[2].innerHTML = "";
@@ -154,7 +153,7 @@ function clicaCorrige (){
             numero[1].classList.remove('blink');
             zeraNome()
         }
-    }else if (etapa==3){
+    } else if (etapa==3){
         if (numVote.length==2){
             numero[1].innerHTML = "";
             numVote = numVote.slice(0, -1);
@@ -170,47 +169,50 @@ function clicaCorrige (){
     } 
 }
 
+function zeraNome (){
+    let nome = document.getElementById("nome")
+    let vicePrefeito = document.querySelector('.vicePrefeito')
+    let numeroPartido = document.querySelector('.numeroPartido')
+    let partido = document.querySelector('.partido')
+    nome.innerHTML = ``
+    vicePrefeito.innerHTML = ``
+    numeroPartido.innerHTML = ``
+    partido.innerHTML = ``
 
-//BOTAO CONFIRMA
+}
 
-function clicaConfirma (){
+
+//BOTAO CONFIRMA - VERIFICA ETAPA QUE ESTÁ E CHAMA A PRÓXIMA ETAPA
+
+function clickConfirm (){
     if (etapa==1){
         etapa2()
     } else if (etapa==2){
-        etapas[1].cVereadores[indexVereador].votos += 1;
-        etapas[0].eleitores[indexEleitor].votoVereador = numVote;
-        etapas[0].eleitores[indexEleitor].votou = "Sim";
+        steps[1].cVereadores[indexVereador].votos += 1;
+        steps[0].eleitores[indexEleitor].votoVereador = numVote;
+        steps[0].eleitores[indexEleitor].votou = "Sim";
         etapa3()
     }else if (etapa==3){
-        etapas[2].cPrefeitos[indexPrefeito].votos += 1;
-        etapas[0].eleitores[indexEleitor].votoPrefeito = numVote;
+        steps[2].cPrefeitos[indexPrefeito].votos += 1;
+        steps[0].eleitores[indexEleitor].votoPrefeito = numVote;
         screen.classList.add('fim')
         screen.innerHTML = `<div class="resultado">FIM</div>`
-        let faltaVotar = etapas[0].eleitores.filter(eleitor => eleitor.votou == "Não")
+        let faltaVotar = steps[0].eleitores.filter(eleitor => eleitor.votou == "Não")
         console.log(faltaVotar)
         if (faltaVotar.length>0){
             setTimeout(primeiraEtapa, 1300);
-        }/*else {
+        } else {
             setTimeout(resultado, 1300);
-        }*/
+        }
     }
     
 }
-/*function resultado (){
-    screen.classList.remove('fim')
-    screen.classList.add('resultado')
-    let resultado = document.querySelector('.resultado')
-    etapas[1].cVereadores.forEach(element => {
-        resultado.innerHTML += `Nome: ${element.nomeVereador} - Votos: ${element.votos}`
-    });
-    
-}*/
+
+//PRIMEIRA ETAPA
 
 function primeiraEtapa (){
     etapa=1
     numVote=""
-    /*let logoEntrada = document.getElementById("logo-entrada")
-    logoEntrada.style.display = "none";*/
     screen.classList.remove('fim')
     screen.innerHTML = `
     <div class="left-right">
@@ -219,7 +221,7 @@ function primeiraEtapa (){
                 <div class="d1-1">
                 </div>
                 <div class="d1-2">
-                    ${etapas[0].titulo}
+                    ${steps[0].titulo}
                 </div>
                 <div class="d1-3" id="d1-3">
                       
@@ -247,7 +249,7 @@ function primeiraEtapa (){
     `
    let d1_3 = document.getElementById("d1-3")
 
-   for (var i = 0;i<etapas[0].qtdeNum;i++){
+   for (var i = 0;i<steps[0].qtdeNum;i++){
     d1_3.innerHTML += `
         <div class="container-vote" id="numero">
         </div>
@@ -255,6 +257,9 @@ function primeiraEtapa (){
     }
     numero[0].classList.add('blink');
 }
+
+//SEGUNDA ETAPA
+
 function etapa2(){
     etapa = 2;
     numVote = ""
@@ -271,7 +276,7 @@ function etapa2(){
     numeroPartido.innerHTML = ``
     partido.innerHTML = ``
 
-    for (var i = 0;i<etapas[1].qtdeNum;i++){
+    for (var i = 0;i<steps[1].qtdeNum;i++){
         
         d13.innerHTML += `
             <div class="container-vote" id="numero">
@@ -279,8 +284,10 @@ function etapa2(){
             `;
         }
     numero[0].classList.add('blink');
-    console.log(indexEleitor)
 }
+
+//TERCEIRA ETAPA
+
 function etapa3(){
     etapa = 3;
     numVote = ""
@@ -297,15 +304,26 @@ function etapa3(){
     numeroPartido.innerHTML = ``
     partido.innerHTML = ``
 
-    for (var i = 0;i<etapas[2].qtdeNum;i++){
+    for (var i = 0;i<steps[2].qtdeNum;i++){
         
         d13.innerHTML += `
             <div class="container-vote" id="numero">
             </div>
-            `;
-        }
+             `
+    }
     numero[0].classList.add('blink');
-    console.log(indexEleitor)
+}
+
+//RESULTADO
+
+function resultado (){
+    screen.classList.remove('fim')
+    screen.classList.add('resultado')
+    let resultado = document.querySelector('.resultado')
+    steps[1].cVereadores.forEach(element => {
+        resultado.innerHTML += `Nome: ${element.nomeVereador} - Votos: ${element.votos}`
+    });
+    
 }
 
 
@@ -313,25 +331,25 @@ function etapa3(){
 //VERIFICA SE O ELEITOR ESTÁ NA BASE DE DADOS
 var vereadorEncontrado = []
 var prefeitoEncontrado = []
-var nomeEncontrado;
-var javotou = false;
-var encontrado = false;
+var nomeEncontrado
+var javotou = false
+var encontrado = false
 function verificaVoto(n) {
     if(etapa==1){
-        for (var i = 0;etapas[0].eleitores.length>i;i++){
-            if (etapas[0].eleitores[i].votoVereador.length > 0 && numVote==etapas[0].eleitores[i].tEleitor) {
-                javotou = true;
-            } else if (numVote.length==3 && parseInt(numVote)===etapas[0].eleitores[i].tEleitor && etapas[0].eleitores[i].votoVereador.length == 0) {
-                encontrado = true;
-                nomeEncontrado = etapas[0].eleitores[i].eleitor;
-                indexEleitor = i;
+        for (var i = 0;steps[0].eleitores.length>i;i++){
+            if (steps[0].eleitores[i].votoVereador.length > 0 && numVote==steps[0].eleitores[i].tEleitor) {
+                javotou = true
+            } else if (numVote.length==3 && parseInt(numVote)===steps[0].eleitores[i].tEleitor && steps[0].eleitores[i].votoVereador.length == 0) {
+                encontrado = true
+                nomeEncontrado = steps[0].eleitores[i].eleitor;
+                indexEleitor = i
             } 
         }
         let p = new Promise((resolve, reject) => {
-            if (encontrado==true){
+            if (encontrado==true && numVote.length==3){
                 resolve(`Nome: ${nomeEncontrado}`)
             }
-            else if (encontrado==false){
+            else if (encontrado==false && numVote.length==3){
                 reject(`NÃO ENCONTRADO`)
             }
         })
@@ -344,28 +362,28 @@ function verificaVoto(n) {
             p.then((message) => {
                 let nome = document.getElementById("nome")
                 nome.innerHTML = `${message}`
-                encontrado=false;
+                encontrado=false
             }).catch((err) => {
                 let nome = document.getElementById("nome")
                 nome.innerHTML = `${err}`
-                encontrado=false;
+                encontrado=false
             })
         }
-    }else if (etapa==2){
-        for (var i = 0;etapas[1].cVereadores.length>i;i++){
-            if(numVote.length==5 && parseInt(numVote)===etapas[1].cVereadores[i].numeroVereador) {
-                encontrado = true;
-                vereadorEncontrado[0] = etapas[1].cVereadores[i].nomeVereador;
-                vereadorEncontrado[1] = etapas[1].cVereadores[i].numeroVereador;
-                vereadorEncontrado[2] = etapas[1].cVereadores[i].partidoVereador;
-                indexVereador = i;
+    } else if (etapa==2){
+        for (var i = 0;steps[1].cVereadores.length>i;i++){
+            if(numVote.length==5 && parseInt(numVote)===steps[1].cVereadores[i].numeroVereador) {
+                encontrado = true
+                vereadorEncontrado[0] = steps[1].cVereadores[i].nomeVereador
+                vereadorEncontrado[1] = steps[1].cVereadores[i].numeroVereador
+                vereadorEncontrado[2] = steps[1].cVereadores[i].partidoVereador
+                indexVereador = i
             }
         }
         let p = new Promise((resolve, reject) => {
-            if (encontrado==true){
+            if (encontrado==true && numVote.length==3){
                 resolve(vereadorEncontrado)
             }
-            else if (encontrado==false){
+            else if (encontrado==false && numVote.length==3){
                 reject(`NÃO ENCONTRADO`)
             }
         })
@@ -377,29 +395,29 @@ function verificaVoto(n) {
                 nome.innerHTML = `Nome: ${message[0]}`
                 numeroPartido.innerHTML = `Número: ${message[1]}`
                 partido.innerHTML = `Partido: ${message[2]}`
-                encontrado=false;
+                encontrado=false
             }).catch((err) => {
     
                 nome.innerHTML = `${err}`
-                encontrado=false;
+                encontrado=false
             })
         }
-    }else if (etapa==3){
-        for (var i = 0;etapas[2].cPrefeitos.length>i;i++){
-            if(numVote.length==2 && parseInt(numVote)===etapas[2].cPrefeitos[i].numeroPrefeito) {
+    } else if (etapa==3){
+        for (var i = 0;steps[2].cPrefeitos.length>i;i++){
+            if(numVote.length==2 && parseInt(numVote)===steps[2].cPrefeitos[i].numeroPrefeito) {
                 encontrado = true;
-                prefeitoEncontrado[0] = etapas[2].cPrefeitos[i].nomePrefeito;
-                prefeitoEncontrado[1] = etapas[2].cPrefeitos[i].vicePrefeito;
-                prefeitoEncontrado[2] = etapas[2].cPrefeitos[i].numeroPrefeito;
-                prefeitoEncontrado[3] = etapas[2].cPrefeitos[i].partidoPrefeito;
+                prefeitoEncontrado[0] = steps[2].cPrefeitos[i].nomePrefeito;
+                prefeitoEncontrado[1] = steps[2].cPrefeitos[i].vicePrefeito;
+                prefeitoEncontrado[2] = steps[2].cPrefeitos[i].numeroPrefeito;
+                prefeitoEncontrado[3] = steps[2].cPrefeitos[i].partidoPrefeito;
                 indexPrefeito = i;
             }
         }
         let p = new Promise((resolve, reject) => {
-            if (encontrado==true){
+            if (encontrado==true && numVote.length==3){
                 resolve(prefeitoEncontrado)
             }
-            else if (encontrado==false){
+            else if (encontrado==false && numVote.length==3){
                 reject(`NÃO ENCONTRADO`)
             }
         })
@@ -415,7 +433,6 @@ function verificaVoto(n) {
                 partido.innerHTML = `Partido: ${message[3]}`
                 encontrado=false;
             }).catch((err) => {
-    
                 nome.innerHTML = `${err}`
                 encontrado=false;
             })
@@ -423,25 +440,13 @@ function verificaVoto(n) {
     }
 }
 
-//ZERA O NOME
-function zeraNome (){
-    let nome = document.getElementById("nome")
-    let vicePrefeito = document.querySelector('.vicePrefeito')
-    let numeroPartido = document.querySelector('.numeroPartido')
-    let partido = document.querySelector('.partido')
-    nome.innerHTML = ``
-    vicePrefeito.innerHTML = ``
-    numeroPartido.innerHTML = ``
-    partido.innerHTML = ``
-}
-
 
 //CRIA ELEITOR
-function criaEleitor () {
+function addEleitor () {
     let nomeEleitor = document.getElementById("nomeEleitor").value;
     let tituloEleitor = document.getElementById("tituloEleitor").value;
     if (tituloEleitor.length==3 && nomeEleitor!="") {
-        function criarEleitor (nome, titulo){
+        function createEleitor (nome, titulo){
             return {
                 eleitor: nome,
                 tEleitor: parseInt(titulo),
@@ -451,22 +456,22 @@ function criaEleitor () {
             }
         }
         var eleitor = [
-            criarEleitor (nomeEleitor, tituloEleitor)   
+            createEleitor (nomeEleitor, tituloEleitor)   
         ]
         modal1.classList.remove('active')
         document.getElementById("nomeEleitor").value = ""
         document.getElementById("tituloEleitor").value = ""
-        cadastraEleitor(eleitor[0])
+        registerEleitor(eleitor[0])
 }else {
     alert("Nome ou título incorretos")
     }
 }
 //CRIA VEREADOR
-function criaVereador () {
+function addVereador () {
     let nomeVereador = document.getElementById("nome-vereador").value;
     let numeroVereador = document.getElementById("numero-vereador").value;
     let partidoVereador = document.getElementById("partido-vereador").value;
-    function criarVereador (nome, numero, partido){
+    function createVereador (nome, numero, partido){
         return {
             nomeVereador: nome,
             numeroVereador: parseInt(numero),
@@ -475,21 +480,21 @@ function criaVereador () {
         }
     }
     var vereador = [
-        criarVereador (nomeVereador, numeroVereador, partidoVereador)   
+        createVereador (nomeVereador, numeroVereador, partidoVereador)   
     ]
     modal2.classList.remove('active')
     document.getElementById("nome-vereador").value = ""
     document.getElementById("numero-vereador").value = ""
     document.getElementById("partido-vereador").value = ""
-    cadastraVereador(vereador[0]) 
+    registerVereador(vereador[0]) 
 }
 //CRIA PREFEITO
-function criaPrefeito () {
+function addPrefeito () {
     let nomePrefeito = document.getElementById("nome-prefeito").value;
     let vicePrefeito = document.getElementById("vice-prefeito").value;
     let numeroPrefeito = document.getElementById("numero-prefeito").value;
     let partidoPrefeito = document.getElementById("partido-prefeito").value;
-    function criarPrefeito (nome, vice, numero, partido){
+    function createPrefeito (nome, vice, numero, partido){
         return {
             nomePrefeito: nome,
             vicePrefeito: vice,
@@ -499,83 +504,80 @@ function criaPrefeito () {
         }
     }
     var prefeito = [
-        criarPrefeito (nomePrefeito, vicePrefeito, numeroPrefeito, partidoPrefeito)   
+        createPrefeito (nomePrefeito, vicePrefeito, numeroPrefeito, partidoPrefeito)   
     ]
     modal3.classList.remove('active')
     document.getElementById("nome-prefeito").value = ""
     document.getElementById("vice-prefeito").value = ""
     document.getElementById("numero-prefeito").value = ""
     document.getElementById("partido-prefeito").value = ""
-    cadastraPrefeito(prefeito[0]) 
+    registerPrefeito(prefeito[0]) 
 }
 
 
 //CADASTRA ELEITOR
 var countEle = 0;
-function cadastraEleitor (n){
-    let mostraEleitores = document.querySelector('.mostra-eleitores')
-    etapas[0].eleitores[countEle] = n;
-    let filtro = etapas[0].eleitores.filter(eleitor => eleitor.tEleitor == etapas[0].eleitores[countEle].tEleitor)
+function registerEleitor (n){
+    let showEleitores = document.querySelector('.show-eleitores')
+    steps[0].eleitores[countEle] = n;
+    let filtro = steps[0].eleitores.filter(eleitor => eleitor.tEleitor == steps[0].eleitores[countEle].tEleitor)
     if (filtro.length==1){
-        mostraEleitores.innerHTML += `<tr id="del-eleitor${countEle}"><td class="palavra">${etapas[0].eleitores[countEle].eleitor}</td><td class="palavra">${etapas[0].eleitores[countEle].tEleitor}</td><td class="icone"><i onclick="deletaEleitor(${countEle})" class="fa-regular fa-trash-can"></i></td></tr>` 
+        showEleitores.innerHTML += `<tr id="del-eleitor${countEle}"><td class="palavra">${steps[0].eleitores[countEle].eleitor}</td><td class="palavra">${steps[0].eleitores[countEle].tEleitor}</td><td class="icone"><i onclick="deletaEleitor(${countEle})" class="fa-regular fa-trash-can"></i></td></tr>` 
         countEle++
     }else if (filtro.length==2){
         alert("repetido")
-        etapas[0].eleitores.pop()
+        steps[0].eleitores.pop()
     }
 
 } 
 //CADASTRA VEREADOR
 var countVer = 0;
-function cadastraVereador (n){
-    let mostraVereadores = document.querySelector('.mostra-vereadores')
-    console.log(n)
-    etapas[1].cVereadores[countVer] = n;
-    let filtro = etapas[1].cVereadores.filter(vereador => vereador.numeroVereador == etapas[1].cVereadores[countVer].numeroVereador)
+function registerVereador (n){
+    let showVereadores = document.querySelector('.show-vereadores')
+    steps[1].cVereadores[countVer] = n;
+    let filtro = steps[1].cVereadores.filter(vereador => vereador.numeroVereador == steps[1].cVereadores[countVer].numeroVereador)
    if (filtro.length==1){
-        mostraVereadores.innerHTML += `<tr id="del-vereador${countVer}"><td class="palavra">${etapas[1].cVereadores[countVer].nomeVereador}</td><td class="palavra">${etapas[1].cVereadores[countVer].numeroVereador}</td><td class="palavra">${etapas[1].cVereadores[countVer].partidoVereador}</td><td class="icone"><i onclick="deletaVereador(${countVer})" class="fa-regular fa-trash-can"></i></td></tr>` 
+        showVereadores.innerHTML += `<tr id="del-vereador${countVer}"><td class="palavra">${steps[1].cVereadores[countVer].nomeVereador}</td><td class="palavra">${steps[1].cVereadores[countVer].numeroVereador}</td><td class="palavra">${steps[1].cVereadores[countVer].partidoVereador}</td><td class="icone"><i onclick="deletaVereador(${countVer})" class="fa-regular fa-trash-can"></i></td></tr>` 
         countVer++
     }else if (filtro.length==2){
         alert("repetido")
-        etapas[1].cVereadores.pop()
+        steps[1].cVereadores.pop()
     }
 }
 //CADASTRA PREFEITO
 var countPre = 0;
-function cadastraPrefeito (n){
-    let mostraPrefeitos = document.querySelector('.mostra-prefeitos')
-    etapas[2].cPrefeitos[countPre] = n;
-    let filtroNum = etapas[2].cPrefeitos.filter(prefeito => prefeito.numeroPrefeito == etapas[2].cPrefeitos[countPre].numeroPrefeito);
-    let filtroPartido = etapas[2].cPrefeitos.filter(prefeito => prefeito.partidoPrefeito == etapas[2].cPrefeitos[countPre].partidoPrefeito)
-    console.log(filtroNum.length)
-    console.log(filtroPartido.length)
+function registerPrefeito (n){
+    let showPrefeitos = document.querySelector('.show-prefeitos')
+    steps[2].cPrefeitos[countPre] = n;
+    let filtroNum = steps[2].cPrefeitos.filter(prefeito => prefeito.numeroPrefeito == steps[2].cPrefeitos[countPre].numeroPrefeito);
+    let filtroPartido = steps[2].cPrefeitos.filter(prefeito => prefeito.partidoPrefeito == steps[2].cPrefeitos[countPre].partidoPrefeito)
 
     if (filtroNum.length==1 && filtroPartido.length==1){
-        mostraPrefeitos.innerHTML += `<tr id="del-prefeito${countPre}"><td class="palavra">${etapas[2].cPrefeitos[countPre].nomePrefeito}</td><td class="palavra">${etapas[2].cPrefeitos[countPre].vicePrefeito}</td><td class="palavra">${etapas[2].cPrefeitos[countPre].numeroPrefeito}</td><td class="palavra">${etapas[2].cPrefeitos[countPre].partidoPrefeito}</td><td class="icone"><i onclick="deletaPrefeito(${countPre})" class="fa-regular fa-trash-can"></i></td></tr>` 
+        showPrefeitos.innerHTML += `<tr id="del-prefeito${countPre}"><td class="palavra">${steps[2].cPrefeitos[countPre].nomePrefeito}</td><td class="palavra">${steps[2].cPrefeitos[countPre].vicePrefeito}</td><td class="palavra">${steps[2].cPrefeitos[countPre].numeroPrefeito}</td><td class="palavra">${steps[2].cPrefeitos[countPre].partidoPrefeito}</td><td class="icone"><i onclick="deletaPrefeito(${countPre})" class="fa-regular fa-trash-can"></i></td></tr>` 
         countPre++
     }else if (filtroNum.length==2 || filtroPartido.length==2){
         alert("repetido")
-        etapas[2].cPrefeitos.pop()
+        steps[2].cPrefeitos.pop()
     }
 }  
 
 //DELETA ELEITOR
 function deletaEleitor(n){
-   let indice = document.getElementById("del-eleitor" + n)
-   etapas[0].eleitores[n] = {}
-   indice.innerHTML = ``
+   let index = document.getElementById("del-eleitor" + n)
+   steps[0].eleitores[n] = {}
+   index.innerHTML = ``
 }
 //DELETA VEREADOR
 function deletaVereador(n){
-    let indice = document.getElementById("del-vereador" + n)
-   etapas[1].cVereadores[n] = {}
-     indice.innerHTML = ``
+    let index = document.getElementById("del-vereador" + n)
+    steps[1].cVereadores[n] = {}
+    index.innerHTML = ``
 }
 //DELETA PREFEITO
 function deletaPrefeito(n){
-    let indice = document.getElementById("del-prefeito" + n)
-    etapas[2].cPrefeitos[n] = {}
-    indice.innerHTML = ``
+    let index = document.getElementById("del-prefeito" + n)
+    steps[2].cPrefeitos[n] = {}
+    index.innerHTML = ``
  }
 
 
@@ -583,7 +585,7 @@ function deletaPrefeito(n){
 function openModal1() {
     modal1.classList.add('active')
     modal1.onclick = e => {
-      if (e.target.className.indexOf('modal-container1') !== -1) {
+    if (e.target.className.indexOf('modal-container1') !== -1) {
         modal1.classList.remove('active')
       }
     }  
@@ -604,6 +606,7 @@ function openModal3() {
       }
     }  
 }
+
 //CONTROLADOR DE INPUT
 const inputNumber1 = document.querySelector('.inputNumber1')
 inputNumber1.addEventListener("keypress", function(e){
@@ -629,54 +632,42 @@ inputNumber3.addEventListener("keypress", function(e){
 const inputString1 = document.querySelector('.inputString1')
 inputString1.addEventListener("keypress", function(e){
     let keyCode = (e.keyCode ? e.keyCode: e.wich);
-    if (keyCode==32){
-        console.log("passou")
-    }else if (keyCode > 31 && (keyCode < 65 || keyCode > 90) &&
+    if (keyCode > 31 && (keyCode < 65 || keyCode > 90) &&
     (keyCode < 97 || keyCode > 122))
     e.preventDefault()
 });
 const inputString2 = document.querySelector('.inputString2')
 inputString2.addEventListener("keypress", function(e){
     let keyCode = (e.keyCode ? e.keyCode: e.wich);
-    if (keyCode==32){
-        console.log("passou")
-    }else if (keyCode > 31 && (keyCode < 65 || keyCode > 90) &&
+    if (keyCode > 31 && (keyCode < 65 || keyCode > 90) &&
     (keyCode < 97 || keyCode > 122))
     e.preventDefault()
 });
 const inputString3 = document.querySelector('.inputString3')
 inputString3.addEventListener("keypress", function(e){
     let keyCode = (e.keyCode ? e.keyCode: e.wich);
-    if (keyCode==32){
-        console.log("passou")
-    }else if (keyCode > 31 && (keyCode < 65 || keyCode > 90) &&
+    if (keyCode > 31 && (keyCode < 65 || keyCode > 90) &&
     (keyCode < 97 || keyCode > 122))
     e.preventDefault()
 });
 const inputString4 = document.querySelector('.inputString4')
 inputString4.addEventListener("keypress", function(e){
     let keyCode = (e.keyCode ? e.keyCode: e.wich);
-    if (keyCode==32){
-        console.log("passou")
-    }else if (keyCode > 31 && (keyCode < 65 || keyCode > 90) &&
+    if (keyCode > 31 && (keyCode < 65 || keyCode > 90) &&
     (keyCode < 97 || keyCode > 122))
     e.preventDefault()
 });
 const inputString5 = document.querySelector('.inputString5')
 inputString5.addEventListener("keypress", function(e){
     let keyCode = (e.keyCode ? e.keyCode: e.wich);
-    if (keyCode==32){
-        console.log("passou")
-    }else if (keyCode > 31 && (keyCode < 65 || keyCode > 90) &&
+    if (keyCode > 31 && (keyCode < 65 || keyCode > 90) &&
     (keyCode < 97 || keyCode > 122))
     e.preventDefault()
 });
 const inputString6 = document.querySelector('.inputString6')
 inputString6.addEventListener("keypress", function(e){
     let keyCode = (e.keyCode ? e.keyCode: e.wich);
-    if (keyCode==32){
-        console.log("passou")
-    }else if (keyCode > 31 && (keyCode < 65 || keyCode > 90) &&
+    if (keyCode > 31 && (keyCode < 65 || keyCode > 90) &&
     (keyCode < 97 || keyCode > 122))
     e.preventDefault()
 });

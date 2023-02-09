@@ -8,7 +8,7 @@
     <title>Urna Eletrônica</title>
 </head>
 <body>
-    <section class="section-urn">
+    <section>
         <div id="urn">
            <div class="screen">
                 <div class="left-right">
@@ -37,91 +37,91 @@
                 </div>
            </div>
            <div class="keyboard-area">
-            <div class="logo">
-                <img src="assets/imgs/logo.png" alt="logo">
-                <div class="t-logo">
-                    <h1 class="t-logo-1">Justiça</h1>
-                    <h1 class="t-logo-2">Eleitoral</h1>
-                </div>
-            </div>
-            <div class="keyboard">
-                <div class="align-btn">
-                    <div onclick="clicaNum('1')" class="btnNum">
-                        <label>1</label>
-                    </div>
-                    <div onclick="clicaNum(2)" class="btnNum" value="2">
-                        <label>2</label>
-                    </div>
-                    <div  onclick="clicaNum(3)" class="btnNum" value="2">
-                        <label>3</label>
+                <div class="logo">
+                    <img src="assets/imgs/logo.png" alt="logo">
+                    <div class="t-logo">
+                        <h1 class="t-logo-1">Justiça</h1>
+                        <h1 class="t-logo-2">Eleitoral</h1>
                     </div>
                 </div>
-                <div class="align-btn">
-                    <div onclick="clicaNum(4)" class="btnNum" value="4">
-                        <label>4</label>
+                <div class="keyboard">
+                    <div class="align-btn">
+                        <div onclick="clickNum('1')" class="btnNum">
+                            <label>1</label>
+                        </div>
+                        <div onclick="clickNum(2)" class="btnNum" value="2">
+                            <label>2</label>
+                        </div>
+                        <div  onclick="clickNum(3)" class="btnNum" value="2">
+                            <label>3</label>
+                        </div>
                     </div>
-                    <div onclick="clicaNum(5)" class="btnNum" value="5">
-                        <label>5</label>
+                    <div class="align-btn">
+                        <div onclick="clickNum(4)" class="btnNum" value="4">
+                            <label>4</label>
+                        </div>
+                        <div onclick="clickNum(5)" class="btnNum" value="5">
+                            <label>5</label>
+                        </div>
+                        <div  onclick="clickNum(6)" class="btnNum" value="6">
+                            <label>6</label>
+                        </div>
                     </div>
-                    <div  onclick="clicaNum(6)" class="btnNum" value="6">
-                        <label>6</label>
+                    <div class="align-btn">
+                        <div onclick="clickNum(7)" class="btnNum" value="7">
+                            <label>7</label>
+                        </div>
+                        <div onclick="clickNum(8)" class="btnNum" value="8">
+                            <label>8</label>
+                        </div>
+                        <div  onclick="clickNum(9)" class="btnNum" value="9">
+                            <label>9</label>
+                        </div>
+                    </div>
+                    <div class="align-btn">
+                        <div onclick="clickNum(0)" class="btnNum" value="0">
+                            <label>0</label>
+                        </div>
+                    </div>
+                    <div class="align-btn">
+                        <div onclick="clickWhite()" class="btnWhite">
+                            <label>Branco</label>
+                        </div>
+                        <div onclick="clickDel()" class="btnDel">
+                            <label>Corrige</label>
+                        </div>
+                        <div  onclick="clickConfirm()" class="btnConfirm">
+                            <label>Confirma</label>
+                        </div>
                     </div>
                 </div>
-                <div class="align-btn">
-                    <div onclick="clicaNum(7)" class="btnNum" value="7">
-                        <label>7</label>
-                    </div>
-                    <div onclick="clicaNum(8)" class="btnNum" value="8">
-                        <label>8</label>
-                    </div>
-                    <div  onclick="clicaNum(9)" class="btnNum" value="9">
-                        <label>9</label>
-                    </div>
-                </div>
-                <div class="align-btn">
-                    <div onclick="clicaNum(0)" class="btnNum" value="0">
-                        <label>0</label>
-                    </div>
-                </div>
-                <div class="align-btn">
-                    <div onclick="clicaBranco()" class="btnWhite">
-                        <label>Branco</label>
-                    </div>
-                    <div onclick="clicaCorrige()" class="btnDel">
-                        <label>Corrige</label>
-                    </div>
-                    <div  onclick="clicaConfirma()" class="btnConfirm">
-                        <label>Confirma</label>
-                    </div>
-                </div>
-            </div>
            </div>
         </div>
         <div>
-            <button class="on"onclick="ligaUrna()">ON</button>
-            <button class="off" onclick="desligaUrna()">OFF</button>
+            <button class="on"onclick="urnOn()">ON</button>
+            <button class="off" onclick="urnOff()">OFF</button>
         </div>
         <div class="show-register">
             <div class="table-1">
                 <div class="header-register">
                     <span>Cadastro Eleitores</span>
                     <button onclick="openModal1()" id="new">Incluir</i></button>
-                  </div>
-                  <div class="divTable">
+                    </div>
+                    <div class="divTable">
                     <table>
-                      <thead>
-                        <tr>
-                          <th>Nome</th>
-                          <th>Título</th>
-                          <th class="acao">Excluir</th>
-                        </tr>
-                      </thead>
-                      <tbody class="mostra-eleitores">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Título</th>
+                                <th class="acao">Excluir</th>
+                            </tr>
+                        </thead>
+                        <tbody class="show-eleitores">
                         <tr>
                         </tr>
                       </tbody>
                     </table>
-                  </div>
+                </div>
             </div>
             <div class="table-2">
                 <div class="header-register">
@@ -138,7 +138,7 @@
                           <th class="acao">Excluir</th>
                         </tr>
                       </thead>
-                      <tbody class="mostra-vereadores">
+                      <tbody class="show-vereadores">
                         <tr>
                         </tr>
                       </tbody>
@@ -161,7 +161,7 @@
                             <th class="acao">Excluir</th>
                         </tr>
                       </thead>
-                      <tbody class="mostra-prefeitos">
+                      <tbody class="show-prefeitos">
                         <tr>
                         </tr>
                       </tbody>
@@ -169,47 +169,49 @@
                   </div>
             </div>
         </div>
-            <div class="register">
-                <div class="modal-container1">
-                    <div class="modal1">   
-                        <label for="">Nome Eleitor:</label>
-                        <input type="text"  id="nomeEleitor" class="inputString1" pattern="([aA-zZ]+)">
-                        <label for="">Número Título:</label>
-                        <input type="text" id="tituloEleitor" class="inputNumber1" maxlength="3">
-                        <button onclick="criaEleitor()">Cadastrar</button>
-                    </div>
-                </div>   
-          
-            <div class="register">
-                <div class="modal-container2">
-                    <div class="modal2">   
-                        <label for="">Nome Vereador:</label>
-                        <input type="text" id="nome-vereador" class="inputString2">
-                        <label for="">Número:</label>
-                        <input type="text" id="numero-vereador" class="inputNumber2" maxlength="5">
-                        <label for="">Partido:</label>
-                        <input type="text" id="partido-vereador" class="inputString3">               <button onclick="criaVereador()">Cadastrar</button>
-                    </div>
-                </div>          
+        <div class="register">
+            <div class="modal-container1">
+                <div class="modal1">   
+                    <label for="">Nome Eleitor:</label>
+                    <input type="text"  id="nomeEleitor" class="inputString1" pattern="([aA-zZ]+)">
+                    <label for="">Número Título:</label>
+                    <input type="text" id="tituloEleitor" class="inputNumber1" maxlength="3">
+                    <button onclick="addEleitor()">Cadastrar</button>
+                </div>
             </div>
-            <div class="register">
-                <div class="modal-container3">
-                    <div class="modal3">   
-                        <label for="">Nome Prefeito:</label>
-                        <input type="text" id="nome-prefeito" class="inputString4">
-                        <label for="">Nome Vice:</label>
-                        <input type="text" id="vice-prefeito" class="inputString5">
-                        <label for="">Número:</label>
-                        <input type="text" id="numero-prefeito" class="inputNumber3" maxlength="2">
-                        <label for="">Partido:</label>
-                        <input type="text" id="partido-prefeito" class="inputString6">               <button onclick="criaPrefeito()">Cadastrar</button>
-                    </div>
-                </div>          
-            </div>
+        </div>   
+        <div class="register">
+            <div class="modal-container2">
+                <div class="modal2">   
+                    <label for="">Nome Vereador:</label>
+                    <input type="text" id="nome-vereador" class="inputString2">
+                    <label for="">Número:</label>
+                    <input type="text" id="numero-vereador" class="inputNumber2" maxlength="5">
+                    <label for="">Partido:</label>
+                    <input type="text" id="partido-vereador" class="inputString3">               
+                    <button onclick="addVereador()">Cadastrar</button>
+                </div>
+            </div>          
         </div>
+        <div class="register">
+            <div class="modal-container3">
+                <div class="modal3">   
+                    <label for="">Nome Prefeito:</label>
+                    <input type="text" id="nome-prefeito" class="inputString4">
+                    <label for="">Nome Vice:</label>
+                    <input type="text" id="vice-prefeito" class="inputString5">
+                    <label for="">Número:</label>
+                    <input type="text" id="numero-prefeito" class="inputNumber3" maxlength="2">
+                    <label for="">Partido:</label>
+                    <input type="text" id="partido-prefeito" class="inputString6">               
+                    <button onclick="addPrefeito()">Cadastrar</button>
+                </div>
+            </div>          
+        </div>
+    </div>
     </section>
     <script src="https://kit.fontawesome.com/ed140f0d76.js" crossorigin="anonymous"></script> 
-    <script src="assets/script/etapas.js"></script>
+    <script src="assets/script/steps.js"></script>
     <script src="assets/script/script.js"></script>
 </body>
 </html>
