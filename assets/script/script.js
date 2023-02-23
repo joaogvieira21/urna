@@ -380,10 +380,10 @@ function verificaVoto(n) {
             }
         }
         let p = new Promise((resolve, reject) => {
-            if (encontrado==true && numVote.length==3){
+            if (encontrado==true && numVote.length==5){
                 resolve(vereadorEncontrado)
             }
-            else if (encontrado==false && numVote.length==3){
+            else if (encontrado==false && numVote.length==5){
                 reject(`NÃO ENCONTRADO`)
             }
         })
@@ -414,10 +414,10 @@ function verificaVoto(n) {
             }
         }
         let p = new Promise((resolve, reject) => {
-            if (encontrado==true && numVote.length==3){
+            if (encontrado==true && numVote.length==2){
                 resolve(prefeitoEncontrado)
             }
-            else if (encontrado==false && numVote.length==3){
+            else if (encontrado==false && numVote.length==2){
                 reject(`NÃO ENCONTRADO`)
             }
         })
